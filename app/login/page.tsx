@@ -50,7 +50,7 @@ export default function LoginForm() {
                             </div>
                             <Input id="password" type="password" required />
                         </div>
-                        <Link href="#" className="inline-block text-sm underline">
+                        <Link href="/restablecer-contrasena" className="inline-block text-sm underline">
                             Olvidaste tu contraseña?
                         </Link>
                         <Link href="/" type="submit" >

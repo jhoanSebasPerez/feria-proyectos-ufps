@@ -5,18 +5,26 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Textarea } from "@/components/ui/textarea";
-import { CalendarIcon, ListFilter, MinusCircle, PlusCircle } from "lucide-react";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Info, ListFilter, MinusCircle, Plus, PlusCircle } from "lucide-react";
+import { Card, CardFooter, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { EditorTextoEnriquecido } from "@/components/ui/texto-enriquecido";
+import SearchableSelector from "@/components/ui/searchable-selector";
+import { Docente } from "@/app/common/interfaces";
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
+import FormDocenteDialog from "@/components/ui/form-registro-dialog";
+import { Toaster } from "@/components/ui/toaster";
 
+const docentes: Docente[] = [
+    { codigo: "168400", nombre: "John Zuluaga" },
+    { codigo: "378530", nombre: "Maria Gutierrez" },
+    { codigo: "390390", nombre: "Juan Perez" },
+    { codigo: "432423", nombre: "Carlos Perez" }
+]
 
 export const FormSection1 = () => {
 
     const [date, setDate] = useState<Date>()
+    const [openFormDocenteDialog, setOpenFormDocenteDialog] = useState(false)
 
     return (
         <>
@@ -27,7 +35,19 @@ export const FormSection1 = () => {
                 </div>
                 <div className="grid gap-2 mt-6">
                     <Label htmlFor="orientador" className="font-bold text-base text-black">Nombre del docente orientador</Label>
-                    <Input id="orientador" placeholder="Nombre del docente orientador" />
+                    <div className="flex justify-between gap-12">
+                        <div>
+                            <SearchableSelector placeholder="Selecciona al docente orientador" items={docentes} />
+                            <div className="flex items-center gap-2 mt-1">
+                                <Info className="w-4" /><span className="text-sm text-gray-600">Si no encuentras al docente puedes realizar la solicitud para agregar a un nuevo docente pulsando en el botón</span>
+                            </div>
+                        </div>
+                        <FormDocenteDialog
+                            textButtonTrigger="Solicitar nuevo docente"
+                            textButtonSubmit="Solicitar"
+                            title="Formulario registrar docente"
+                            description="Ingresa cada uno de los campos para solicitar el registro de un nuevo docente" />
+                    </div>
                 </div>
                 <div className="flex justify-between items-center mt-6">
                     <div className="grid gap-2">
@@ -171,6 +191,7 @@ export const FormSection1 = () => {
             <CardFooter className="mt-8">
                 <span className="text-sm">Pasa a la siguiente sección en donde proporcionarás información detallada del proyecto</span>
             </CardFooter>
+            <Toaster />
         </>
     );
 };

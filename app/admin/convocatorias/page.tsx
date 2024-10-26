@@ -1,3 +1,6 @@
+"use client"
+
+import { Convocatoria } from "@/app/common/interfaces";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -7,17 +10,6 @@ import { ListFilter, PlusCircle } from "lucide-react";
 
 import Image from "next/image";
 import Link from "next/link";
-
-interface Convocatoria {
-    id: number;
-    titulo: string;
-    descripcion: string;
-    fechaFin: Date;
-    fechaInicio: Date;
-    isActive: boolean;
-    imagen?: string;
-}
-
 
 export default function AdminConvocatorias() {
 
@@ -29,7 +21,8 @@ export default function AdminConvocatorias() {
             fechaFin: new Date(),
             fechaInicio: new Date(),
             isActive: false,
-            imagen: "/images/img-convocatoria1.webp"
+            imagen: "/images/img-convocatoria1.webp",
+            tipo: "semillero"
         },
         {
             id: 2,
@@ -38,7 +31,8 @@ export default function AdminConvocatorias() {
             fechaFin: new Date(),
             fechaInicio: new Date(),
             isActive: true,
-            imagen: "/images/img-convocatoria2.webp"
+            imagen: "/images/img-convocatoria2.webp",
+            tipo: "aula"
         },
         {
             id: 3,
@@ -47,7 +41,8 @@ export default function AdminConvocatorias() {
             fechaFin: new Date(),
             fechaInicio: new Date(),
             isActive: true,
-            imagen: "/images/img-convocatoria3.webp"
+            imagen: "/images/img-convocatoria3.webp",
+            tipo: "semillero"
         },
     ];
 
